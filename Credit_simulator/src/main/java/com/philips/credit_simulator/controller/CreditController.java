@@ -8,5 +8,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/credit")
 public class CreditController {
 
-    public ResponseEntity<>
+    //public ResponseEntity<>
 }

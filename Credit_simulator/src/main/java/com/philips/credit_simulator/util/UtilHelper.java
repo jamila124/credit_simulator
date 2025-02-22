@@ -30,12 +30,21 @@ public class UtilHelper {
         return condition.equalsIgnoreCase("Baru") || condition.equalsIgnoreCase("Bekas");
     }
 
-    public static boolean isValidVehicleYear(String condition,int year) {
+    public static boolean isValidVehicleYearByCondition(String condition,int year) {
         int currentYear = Year.now().getValue();
         if (condition.equalsIgnoreCase("Baru")) {
             return year>= (currentYear -1);
         }
         return year > 1999 && year <= currentYear;
+    }
+
+    public static boolean isValidYear(int year) {
+        int currentYear = Year.now().getValue();
+        if (String.valueOf(year).length() == 4){
+            return year >= 1999 && year <= currentYear;
+        }else {
+            return false;
+        }
     }
 
 

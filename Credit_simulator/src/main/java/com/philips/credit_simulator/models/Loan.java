@@ -1,11 +1,13 @@
 package com.philips.credit_simulator.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Loan {
     protected double totalLoan;
     protected int tenor;
     protected double downPayment;
-    protected double interestRate;
-
+    protected List<Double> interestRate;
 
     public abstract double getBaseRate();
 
@@ -13,52 +15,54 @@ public abstract class Loan {
         this.totalLoan = totalLoan;
         this.tenor = tenor;
         this.downPayment = downPayment;
-        this.interestRate = calculateInterestRate(tenor);
+        interestRate = calculateInterestRate(tenor);
     }
 
-    private double calculateInterestRate(int tenor) {
+    private List<Double> calculateInterestRate(int tenor) {
         double baseRate = getBaseRate();
+        List<Double> interestRate = new ArrayList<>();
+        interestRate.add(baseRate);
         for(int year = 2; year <= tenor; year++) {
             if ((year -1 ) % 2 == 0){
-                baseRate += 0.5;
+                interestRate.add(baseRate += 0.5);
             }else {
-                baseRate += 0.1;
+                interestRate.add(baseRate += 0.1);
             }
         }
-        return baseRate;
+        return interestRate;
     }
 
-    public double monthlyInstallment() {
+    public double calculateMonthlyInstallment() {
         double loanAmount = totalLoan - downPayment;
-        double monthlyRate = (interestRate / 100) / 12; // Convert annual interest rate to monthly
-        int totalMonths = tenor * 12;
-
-        return (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, totalMonths))
-                / (Math.pow(1 + monthlyRate, totalMonths) - 1);
+        double tenorTemp = tenor;
+        double installmentMounthlyAvg = 0;
+        double installmentMounthly;
+        double installmentYearly = 0;
+        for (Double rate : interestRate) {
+            loanAmount = loanAmount - installmentYearly;
+            loanAmount = loanAmount + (loanAmount * (rate/ 100));
+            installmentMounthly = loanAmount / (tenorTemp * 12);
+            installmentYearly = installmentMounthly * 12;
+            installmentMounthlyAvg = installmentMounthlyAvg + installmentYearly;
+            --tenorTemp;
+        }
+        return installmentMounthlyAvg / (tenor * 12);
     }
 
     public double getTotalLoan() {
         return totalLoan;
     }
 
-    public void setTotalLoan(double totalLoan) {
-        this.totalLoan = totalLoan;
-    }
-
     public int getTenor() {
         return tenor;
-    }
-
-    public void setTenor(int tenor) {
-        this.tenor = tenor;
     }
 
     public double getDownPayment() {
         return downPayment;
     }
 
-    public void setDownPayment(double downPayment) {
-        this.downPayment = downPayment;
+    public List<Double> getInterestRate() {
+        return interestRate;
     }
 
     @Override
