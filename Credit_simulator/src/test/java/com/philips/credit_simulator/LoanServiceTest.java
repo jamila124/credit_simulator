@@ -5,16 +5,19 @@ import com.philips.credit_simulator.dto.response.ResponseBody;
 import com.philips.credit_simulator.service.CreditSimulatorService;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.MockitoAnnotations;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class LoanServiceTest {
+    @InjectMocks
     private CreditSimulatorService creditSimulatorService;
 
     @Before
     public void setUp() {
-        creditSimulatorService = new CreditSimulatorService();
+        MockitoAnnotations.initMocks(this);
     }
 
     @Test
