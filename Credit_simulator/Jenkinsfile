@@ -1,0 +1,50 @@
+pipeline {
+    agent any
+
+    stages {
+         stage('pull') {
+             steps {
+                 // Build the Spring Boot application
+               echo 'pull the source code'
+               script {
+                    withCredentials([gitUsernamePassword(credentialsId: 'dashboard-credential', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+                        // Configure Git
+                        sh 'git config --global credential.helper store' // This avoids interactive password prompts
+                        echo "Username: ${env.GIT_USERNAME}"
+						echo "Password: ${env.GIT_PASSWORD}"
+                        // Pull from origin master
+                        sh 'git pull origin main'
+                    }
+                }
+               echo 'pull success with path'
+		   	   sh 'pwd'
+             }
+         }
+         stage('Build') {
+             steps {
+                 // Build the Spring Boot application
+                  echo 'Build package jar'
+                   sh 'java -version'
+               //  tool 'Maven'
+               //  sh 'mvn --version'
+                   sh 'mvn clean package'
+             }
+         }
+
+         stage('Deploy') {
+             steps {
+                 sh 'whoami'
+                 echo 'Deploy the application'
+                 sh 'export BUILD_ID=dontKillMe'
+                 sh 'cp /home/admin/.jenkins/workspace/target/*.jar /home/admin/webapps'
+                 //sh '/opt/test/bin/catalina.sh start &'
+                keepRunning {
+    				sh 'nohup java -jar your-app.jar > output.log 2>&1 &'
+				}
+                 sh 'sleep 60'
+                 echo 'wait till jar running in background with nohup'
+                 echo 'Deploy Completed'
+             }
+        }
+    }
+}
