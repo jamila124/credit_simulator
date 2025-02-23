@@ -8,6 +8,8 @@ import com.philips.credit_simulator.models.MotorcycleLoan;
 import com.philips.credit_simulator.util.UtilHelper;
 import org.springframework.stereotype.Service;
 
+
+// Philippus Muda Sinaga
 @Service
 public class CreditSimulatorService {
 

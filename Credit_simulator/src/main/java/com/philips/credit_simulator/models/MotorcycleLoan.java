@@ -1,5 +1,8 @@
 package com.philips.credit_simulator.models;
 
+
+
+// Philippus Muda Sinaga
 public class MotorcycleLoan extends Loan{
 
     private final double baseRate = 9.0;

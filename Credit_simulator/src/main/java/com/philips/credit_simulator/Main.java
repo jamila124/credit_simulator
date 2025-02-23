@@ -7,6 +7,8 @@ import com.philips.credit_simulator.util.UtilHelper;
 import java.time.Year;
 import java.util.Scanner;
 
+
+// Philippus Muda Sinaga
 public class Main {
 
     public static void main(String[] args) {

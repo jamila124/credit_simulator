@@ -1,5 +1,8 @@
 package com.philips.credit_simulator.models;
 
+
+
+// Philippus Muda Sinaga
 public class CarLoan extends Loan{
 
     private final double baseRate = 8.0;

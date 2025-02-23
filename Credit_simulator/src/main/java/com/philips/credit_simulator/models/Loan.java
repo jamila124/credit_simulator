@@ -3,6 +3,8 @@ package com.philips.credit_simulator.models;
 import java.util.ArrayList;
 import java.util.List;
 
+
+// Philippus Muda Sinaga
 public abstract class Loan {
     protected double totalLoan;
     protected int tenor;

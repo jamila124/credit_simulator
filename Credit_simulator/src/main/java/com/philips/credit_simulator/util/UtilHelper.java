@@ -2,6 +2,8 @@ package com.philips.credit_simulator.util;
 
 import java.time.Year;
 
+
+// Philippus Muda Sinaga
 public class UtilHelper {
 
     private static final int maxLoanAmount = 1000000000;
