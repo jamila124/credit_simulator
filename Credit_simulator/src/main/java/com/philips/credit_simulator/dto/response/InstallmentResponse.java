@@ -1,6 +1,6 @@
 package com.philips.credit_simulator.dto.response;
 
-public class ResponseBody {
+public class InstallmentResponse {
     private String monthlyInstallment;
 
     public String getMonthlyInstallment() {

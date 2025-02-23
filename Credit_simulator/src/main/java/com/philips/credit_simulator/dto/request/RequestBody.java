@@ -3,10 +3,19 @@ package com.philips.credit_simulator.dto.request;
 public class RequestBody {
     private String vehicleType;
     private String vehicleCondition;
-    private String vehicleYear;
+    private int vehicleYear;
     public Integer totalLoan;
     public Integer tenorLoan;
     public Integer totalDownPayment;
+
+    public RequestBody(String vehicleType, String vehicleCondition, int vehicleYear, Integer totalLoan, Integer tenorLoan, Integer totalDownPayment) {
+        this.vehicleType = vehicleType;
+        this.vehicleCondition = vehicleCondition;
+        this.vehicleYear = vehicleYear;
+        this.totalLoan = totalLoan;
+        this.tenorLoan = tenorLoan;
+        this.totalDownPayment = totalDownPayment;
+    }
 
     public String getVehicleType() {
         return vehicleType;
@@ -24,11 +33,11 @@ public class RequestBody {
         this.vehicleCondition = vehicleCondition;
     }
 
-    public String getVehicleYear() {
+    public int getVehicleYear() {
         return vehicleYear;
     }
 
-    public void setVehicleYear(String vehicleYear) {
+    public void setVehicleYear(int vehicleYear) {
         this.vehicleYear = vehicleYear;
     }
 
